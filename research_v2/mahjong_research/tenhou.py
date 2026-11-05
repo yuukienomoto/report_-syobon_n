@@ -422,7 +422,22 @@ def extract_game(xml_bytes: bytes, player: str) -> dict:
                 if disclosed:
                     shown = sorted(int(t) for t in disclosed.split(","))
                     _require(shown == sorted(hand), "RYUUKYOKU disclosed hand mismatch")
-                    _require(bool(wait_shapes(hand, melds)), "disclosed exhaustive hand lacks structural wait")
+                    if not wait_shapes(hand, melds):
+                        # The log may disclose a formal shape whose only wait
+                        # requires a fifth OWN tile (confirmed in 20120524...).
+                        # Keep feasible waits unchanged for every tactical feature.
+                        # This feature measures disclosure, not feasible tenpai.
+                        concealed = _counts(hand)
+                        formal = []
+                        for tile_type in range(34):
+                            candidate = list(concealed)
+                            candidate[tile_type] += 1
+                            if _completions(tuple(candidate), len(melds)):
+                                formal.append(tile_type)
+                        _require(bool(formal), "disclosed exhaustive hand lacks structural wait")
+                        owned = _counts(hand + [t for m in melds for t in m.tiles])
+                        _require(all(owned[t] == 4 for t in formal), "unexplained disclosed wait discrepancy")
+                        audit["draw_disclosed_own_tile_exhausted_wait"] += 1
                     audit["draw_hand_checks"] += 1
                 observe("exhaustive_draw_disclosed_tenpai_rate", bool(disclosed))
             else:
