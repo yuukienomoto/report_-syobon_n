@@ -4,5 +4,25 @@
   "errors": 0,
   "scope": "synthetic inputs only; no real shobon effects",
   "source_sha256": "3bc09216f7d9ae2c031a57ec104cfe41ff608d047973f5f56895a36cb6b83a41",
-  "plots": 4
+  "plots": 4,
+  "existing_tests_rerun": 61,
+  "total_tests": 67,
+  "cell_integration": {
+    "status": "passed",
+    "synthetic_cached_games": 1580,
+    "code_cell": "c6b-opportunities",
+    "outputs": [
+      "CSVs",
+      "4 PNGs",
+      "Japanese report"
+    ],
+    "reference_and_input_files_unchanged": true,
+    "substitutions": [
+      "download transport reads identical local files",
+      "display silenced",
+      "local directory instead of /content"
+    ],
+    "real_study_results_computed": false
+  },
+  "notebook_commit": "0425118dcd1058257e058e65f03642fc96065bfa"
 }
