@@ -1,0 +1,17 @@
+# C10更新版の実行
+
+修正版NotebookのC10を現在のNotebookへコピーし、C10だけ実行する。メモリ上のopportunity_resultとRUN_DIRがあれば保存先を自動で引き継ぐ。新規セッションの場合はC1後、C10内のOPPORTUNITY_DIRへC6B保存先、RUN_DIR_FOR_REPORTへC7/C9を実行した研究実行フォルダを指定する。C2〜C9、ZIP解析、特徴量再集計、モデル学習、外部再採点は不要。
+
+入力はC6Bのgroup_statistics.csv、mean_differences_smd.csv、analysis_settings.json、opportunity_overlap_windows.csvと、同じrun内のC7/C9保存ファイル。C6Bの群平均・欠損率・差・SMDの整合性を確認し、C7最終学習窓の元対局・ラベルとの一致を確認する。C9は完了記録とハッシュを照合。過去の分類値を変更せず、保存ファイルから掲載する。
+
+出力は `<RUN_DIR>/final_report_opportunity/<新実行ID>/`。thesis_results_ja.md、primary_and_sensitivity_results.csv、C6B元集計CSV、model_performance_comparison.csv、分類結果の元CSVコピー、図、report_sources.jsonを保存する。入力のSHA256・参照元を記録し、旧C10フォルダを上書きしない。
+
+主分析候補はopportunity_overlap。窓内の分子・分母を合算して割り、得られた有効窓を等重みで比較する。期間内の全イベントを一括合算する方式とは区別する。traditional_overlapを感度分析、opportunity_disjointを元対局非重複の感度分析として扱う。共通有効窓も元CSVへ保持する。
+
+序盤ノーテン非現物率の主分析値はC6Bの実CSVから取得する。利用者の既報値 +0.008401 をコードへ埋め込まない。従来方式の +0.0695 と混同しないことを合成CSVの回帰テストで確認する。
+
+符号一致だけで安定性を断定しない。平均差、SMD、有効窓数、非重複化による差の変化量を併記する。片群欠損や小標本では比較を留保する。分類結果は従来の補完後10対局平均入力による補助分析として示し、機会数方式で学習した性能とみなさない。
+
+順序と履歴完全性の確認フラグはFalseのまま。重複窓の非独立性、非重複窓にも残る時系列依存、段位・時間・卓条件・対戦相手の交絡、終端段位と履歴の混在を限界として記載する。
+
+実データCSVはこの開発環境で取得していないため、20項目の実測差や安定性の最終結果はColabで更新レポートを作成して確認する。保存済みCSV以外の推測値を追加しない。

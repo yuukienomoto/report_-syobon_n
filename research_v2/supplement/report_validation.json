@@ -1,0 +1,16 @@
+{
+  "tests": 4,
+  "failures": 0,
+  "errors": 0,
+  "scope": "synthetic CSV report regressions only",
+  "checks": [
+    "primary .008401 vs sensitivity .0695",
+    "sign reversals",
+    "missing group",
+    "source preservation",
+    "saved classification scores",
+    "model and population mismatch rejection"
+  ],
+  "all_tests_rerun": 71,
+  "skips": 0
+}
