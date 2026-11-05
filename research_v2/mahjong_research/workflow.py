@@ -127,9 +127,42 @@ def external_stage(ctx, bundle, data):
 
 
 def final_report(ctx, descriptive, legacy_bundle=None, new_bundle=None, external=None):
+    # C10 can run immediately after C6, including after a Colab restart.
+    run = ctx['folder']
+    if legacy_bundle is None and (run/'model_legacy'/'external_freeze.json').is_file():
+        legacy_bundle = load_frozen_bundle(run/'model_legacy', add_cross)
+    if new_bundle is None and (run/'model_v2'/'external_freeze.json').is_file():
+        new_bundle = load_frozen_bundle(run/'model_v2')
+    attempt = run/'model_v2'/'external_attempt.json'
+    if external is None and new_bundle is not None and attempt.is_file():
+        saved = json.loads(attempt.read_text(encoding='utf-8'))
+        if saved['status'] == 'completed':
+            result_path = run/'external_v2'/'external_metrics.csv'
+            if Path(saved['output_dir']).resolve() != result_path.parent.resolve() or sha256(result_path) != saved['output_sha256']['external_metrics.csv']:
+                raise ValueError('外部結果の保存先またはSHA256が実行記録と一致しません')
+            external = pd.read_csv(result_path, float_precision='round_trip')
     out=new_run(ctx['folder']/'final_report')
     table=performance_report(out,legacy_bundle,new_bundle,external)
     path=thesis_report(out,descriptive,FEATURE_DEFINITIONS,table,True)
+    # Collect only the figures associated with this report and index their data.
+    sources = {'descriptive': Path(descriptive['output_dir']).parent}
+    for label, bundle in [('model_legacy',legacy_bundle),('model_v2',new_bundle)]:
+        if bundle is not None:
+            sources[label] = Path(bundle['model_dir'])
+    if external is not None:
+        sources['external_v2'] = run/'external_v2'
+    index = []
+    for stage, folder in sources.items():
+        for item in sorted(folder.rglob('*')):
+            if item.is_file() and item.suffix in ('.png','.csv','.md'):
+                copy_path = ''
+                if item.suffix == '.png':
+                    dest = out/'figures'/stage/item.relative_to(folder)
+                    dest.parent.mkdir(parents=True, exist_ok=True)
+                    shutil.copyfile(item,dest)
+                    copy_path = dest.relative_to(out).as_posix()
+                index.append(dict(stage=stage,run_relative_path=item.relative_to(run).as_posix(),figure_in_report=copy_path))
+    write_csv(out/'figure_and_table_index.csv', pd.DataFrame(index))
     write_json(out/'execution_status.json',dict(descriptive_executed=True,
         legacy_internal_executed=legacy_bundle is not None,new_internal_executed=new_bundle is not None,
         new_external_executed=external is not None,order_verified=False,full_history_confirmed=False))

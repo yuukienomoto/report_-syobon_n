@@ -126,24 +126,81 @@ def plan_extraction(zip_path, player, key, cache_root, legacy_dir=None):
                     player=player, members=items, target_members=members)
     signature = digest(identity)
     folder = Path(cache_root)/(key+'_'+signature[:20])
-    done = set()
+    done = {}
     for marker in sorted(folder.glob('batch_*.json')):
         meta = json.loads(marker.read_text(encoding='utf-8'))
-        datafile = folder/meta['csv']
-        if meta['signature'] != signature or sha256(datafile) != meta['sha256']:
+        datafile = marker.with_suffix('.csv')
+        if (meta['csv'] != datafile.name or meta['signature'] != signature
+                or not datafile.is_file() or sha256(datafile) != meta['sha256']):
             raise ValueError(f'改善版キャッシュの破損・版不一致: {marker}')
-        batch = pd.read_csv(datafile)
-        if done.intersection(batch.file_id):
-            raise ValueError('改善版バッチ間の重複')
-        done.update(batch.file_id)
-    if not done.issubset(members):
+        batch = pd.read_csv(datafile, usecols=['file_id','status'])
+        if (not batch.file_id.is_unique or set(done).intersection(batch.file_id)
+                or not batch.status.isin(['ok','different_player','error']).all()):
+            raise ValueError('改善版バッチの対局重複または不正な状態')
+        done.update(zip(batch.file_id, batch.status))
+    if not set(done).issubset(members):
         raise ValueError('改善版キャッシュに予定外の対局')
     return dict(zip_path=str(path), player=player, key=key, signature=signature,
-                cache_dir=str(folder), members=members, already_cached=len(done),
+                cache_dir=str(folder), members=members, already_cached=len(done), cached_status_digest=digest(done),
                 remaining=len(members)-len(done), archive_entries=len(items),
                 legacy_dir=str(legacy_dir) if legacy_dir else None,
                 legacy_unresolved_entries=unresolved, extractor_sha256=identity['extractor_sha256'],
                 order_verified=False, full_history_confirmed=False)
+
+
+def _final_frame(data, player):
+    """Same values, dtypes, column order and row order for every batch layout."""
+    from .tenhou import FEATURE_NAMES
+    data = data.copy()
+    if (data.empty or not data.file_id.is_unique or not data.game_id.is_unique
+            or not data.file_id.map(canonical_game_id).eq(data.game_id).all()
+            or not data.player.eq(player).all() or not data.status.eq('ok').all()):
+        raise ValueError('対象データなし、対象者・状態・正規化ID不一致、またはID重複')
+    hours = pd.to_datetime(data.game_id.str[:10], format='%Y%m%d%H', errors='raise')
+    if 'hour' in data and not pd.to_datetime(data.hour, errors='raise').eq(hours).all():
+        raise ValueError('改善版CSVの時刻と対局ID不一致')
+    data['hour'] = hours
+    data['error'] = data['error'].fillna('')
+    audit_counters = sorted(c for c in data if c.startswith('audit_') and c != 'audit_json')
+    counts = [f+s for f in FEATURE_NAMES for s in ('__numerator','__denominator')]
+    for c in ['seat','dan','go_type'] + counts + audit_counters:
+        values = pd.to_numeric(data[c], errors='raise')
+        if c in audit_counters:
+            values = values.fillna(0)  # A sparse Counter key means zero events in a valid game.
+        if not (values.ge(0) & values.mod(1).eq(0)).all():
+            raise ValueError(f'改善版の非負整数欄が不正: {c}')
+        data[c] = values.astype('int64')
+    for c in FEATURE_NAMES:
+        data[c] = pd.to_numeric(data[c], errors='raise').astype('float64')
+    for c, value in [('order_verified',False),('full_history_confirmed',False),('extraction_valid',True)]:
+        if c in data:
+            if not data[c].eq(value).all():
+                raise ValueError(f'改善版CSVの検証フラグ不一致: {c}')
+            data[c] = value
+    order = ['file_id','game_id','hour','player','dan','seat','go_type','status','error','xml_sha256']
+    order += [f+s for f in FEATURE_NAMES for s in ('','__numerator','__denominator')]
+    order += sorted(set(data.columns) - set(order))
+    return data[order].sort_values(['hour','game_id']).reset_index(drop=True)
+
+
+def _load_complete(folder, plan):
+    meta = json.loads((folder/'complete.json').read_text(encoding='utf-8'))
+    raw_path, audit_path = folder/'raw_features_v2.csv', folder/'extraction_audit.csv'
+    if (plan['remaining'] or meta.get('signature') != plan['signature']
+            or meta.get('extractor_sha256') != plan['extractor_sha256']
+            or meta.get('order_verified') is not False or meta.get('full_history_confirmed') is not False
+            or not raw_path.is_file() or sha256(raw_path) != meta.get('sha256') or not audit_path.is_file()
+            or ('audit_sha256' in meta and sha256(audit_path) != meta['audit_sha256'])):
+        raise ValueError('改善版完了キャッシュの破損・版不一致または署名済みバッチ不足')
+    audit = pd.read_csv(audit_path, usecols=['file_id','status'])
+    statuses = dict(zip(audit.file_id, audit.status))
+    if (not audit.file_id.is_unique or digest(statuses) != plan['cached_status_digest']
+            or audit.status.eq('error').any() or (plan['legacy_dir'] and not audit.status.eq('ok').all())):
+        raise ValueError('改善版の完了監査と署名済みバッチが不一致')
+    data = _final_frame(pd.read_csv(raw_path, float_precision='round_trip'), plan['player'])
+    if len(data) != meta.get('rows') or set(data.file_id) != set(audit.loc[audit.status.eq('ok'),'file_id']):
+        raise ValueError('改善版の完了監査と対象対局集合が不一致')
+    return data
 
 
 def extract_cached(plan, max_new=None, batch_size=250):
@@ -156,8 +213,14 @@ def extract_cached(plan, max_new=None, batch_size=250):
     current = plan_extraction(plan['zip_path'],plan['player'],plan['key'],Path(plan['cache_dir']).parent,plan['legacy_dir'])
     if current['signature'] != plan['signature']:
         raise ValueError('プレビュー後に入力または抽出器が変化しました。再プレビューしてください。')
+    plan = current
     folder = Path(plan['cache_dir']); folder.mkdir(parents=True,exist_ok=True)
-    parts = [pd.read_csv(folder/json.loads(p.read_text(encoding='utf-8'))['csv']) for p in sorted(folder.glob('batch_*.json'))]
+    if (folder/'complete.json').exists():
+        print(f"{plan['key']}: 完了済みキャッシュを検証・再利用 / 今回解析 0")
+        return _load_complete(folder, plan)
+    if batch_size <= 0 or (max_new is not None and max_new < 0):
+        raise ValueError('batch_sizeは正、max_newは非負またはNoneを指定')
+    parts = [pd.read_csv(p.with_suffix('.csv'), float_precision='round_trip') for p in sorted(folder.glob('batch_*.json'))]
     done = {f for part in parts for f in part.file_id}
     todo = [f for f in plan['members'] if f not in done]
     if max_new is not None:
@@ -195,26 +258,24 @@ def extract_cached(plan, max_new=None, batch_size=250):
             parts.append(part)
             print(f"保存済み {sum(len(p) for p in parts)} / {len(plan['members'])}")
     allrows=pd.concat(parts,ignore_index=True) if parts else pd.DataFrame(columns=['file_id','status'])
+    allrows = allrows.sort_values('file_id').reset_index(drop=True)
     if 'error' in allrows:
         allrows['error']=allrows['error'].fillna('')
     write_csv(folder/'extraction_audit.csv',allrows[[c for c in ['file_id','game_id','status','error','xml_sha256'] if c in allrows]])
+    if (allrows.status=='error').any():
+        raise ValueError(f"解析失敗 {(allrows.status=='error').sum()} 件。{folder/'extraction_audit.csv'} を確認。失敗対局を除いて窓を詰め直すことは禁止。")
     if len(allrows)!=len(plan['members']):
         print('試験抽出のみ。全件完了ではありません。')
         return None
-    if (allrows.status=='error').any():
-        raise ValueError(f"解析失敗 {(allrows.status=='error').sum()} 件。{folder/'extraction_audit.csv'} を確認。失敗対局を除いて窓を詰め直すことは禁止。")
-    data=allrows[allrows.status.eq('ok')].copy()
-    if data.empty or not data.game_id.is_unique:
-        raise ValueError('対象データなし、または正規化ID重複。自動除去しません。')
-    data['hour']=pd.to_datetime(data.game_id.str[:10],format='%Y%m%d%H',errors='raise')
-    data=data.sort_values(['hour','game_id']).reset_index(drop=True)
+    data=_final_frame(allrows.loc[allrows.status.eq('ok')], plan['player'])
     if plan['legacy_dir']:
         old=load_legacy(plan['legacy_dir'],plan['player']).set_index('game_id')
         if set(old.index)!=set(data.game_id) or not np.array_equal(old.loc[data.game_id,'dan'].to_numpy(),data.dan.to_numpy()):
             raise ValueError('旧版・新版の対局集合または段位が不一致')
     write_csv(folder/'raw_features_v2.csv',data)
     write_json(folder/'complete.json',dict(signature=plan['signature'],rows=len(data),sha256=sha256(folder/'raw_features_v2.csv'),
-                extractor_sha256=plan['extractor_sha256'],order_verified=False,full_history_confirmed=False,
+                extractor_sha256=plan['extractor_sha256'],audit_sha256=sha256(folder/'extraction_audit.csv'),
+                order_verified=False,full_history_confirmed=False,
                 legacy_unresolved_entries=plan['legacy_unresolved_entries']))
     return data
 

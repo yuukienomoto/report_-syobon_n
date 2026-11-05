@@ -554,7 +554,7 @@ def load_frozen_bundle(model_dir, cross_builder=None):
         _require(importlib.metadata.version(package) == version,
                  f"固定時と依存ライブラリが異なります: {package}=={version} が必要")
     features, base = protocol["features"], protocol["base_features"]
-    means = pd.read_csv(folder/"final_training_means.csv").set_index("feature")["mean"]
+    means = pd.read_csv(folder/"final_training_means.csv", float_precision="round_trip").set_index("feature")["mean"]
     tr_ids = set(json.loads((folder/"training_source_ids.json").read_text(encoding="utf-8")))
     fit_ids = set(json.loads((folder/"imputation_source_ids.json").read_text(encoding="utf-8")))
     booster = lgb.Booster(model_str=(folder / "frozen_model.txt").read_text(encoding="utf-8"))

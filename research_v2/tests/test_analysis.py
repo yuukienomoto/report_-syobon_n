@@ -238,6 +238,7 @@ class SyntheticPipelineTests(unittest.TestCase):
                                   forbidden=cls.forbidden, initial_exclude=20,
                                   base_features=["a", "b"], cross_builder=cross)
             restored = load_frozen_bundle(bundle["model_dir"], cross)
+            np.testing.assert_array_equal(bundle['means'].to_numpy(), restored['means'].to_numpy())
             ext = run_external(restored, cls.external, cls.root/version/"external")
             cls.results[version] = dict(desc=desc, bundle=restored, external=ext)
 

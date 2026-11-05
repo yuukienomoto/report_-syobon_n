@@ -1,0 +1,28 @@
+{
+  "utc": "2026-11-05T05:44:03.999001+00:00",
+  "tests": 59,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "scope": "Synthetic and unit tests of the final release. No study estimates.",
+  "source_sha256": {
+    "mahjong_research/__init__.py": "4a224f7d7bd8fbfb9f5e709da65c325893fcd5502dd9c7754b1a29c587de2d76",
+    "mahjong_research/analysis.py": "bba3fe561202b1dd0cdafce1226711c50dda9287d281f45330b315599b79711c",
+    "mahjong_research/inputs.py": "53bd02a3056708aebf5535a4b1bf0e5710b9f34892be043da8a396fe784792b7",
+    "mahjong_research/legacy.py": "b05f00c110da647abde06dc07001e5d31b1c9bdd630ca022c5525e21975f621f",
+    "mahjong_research/reporting.py": "1f0d86e7f688f46224c793558733d2890335037800e4dc47ee417dff7e837ad8",
+    "mahjong_research/tenhou.py": "ef6322c05c21f299205bae1fdc5448b5739c6da7280ed619ae37219d4d4a7fa2",
+    "mahjong_research/workflow.py": "afe16ae49d82f1a251d32dcbe9159dd6b1dd26e5d7d771fcbb66c0dc0beab4cc",
+    "tests/test_analysis.py": "7c502c93ebbc59f588747436a5c5bd3ad7474502ffe0127ba997c566886b1536",
+    "tests/test_inputs.py": "57a51b0c2d8c3fcfa508a274e63036a705018bb5e702875202416b124194326f",
+    "tests/test_tenhou.py": "09d54d5ae2ced8eac74555aa380de4ee64d2e656f9e3a504c0ef27dd486c8c63",
+    "tests/test_workflow.py": "972cdf62066b388f5b3b7c25b4089f53954dc1d52bd2f8b1a044a694ec290659"
+  },
+  "versions": {
+    "numpy": "2.2.6",
+    "pandas": "2.2.3",
+    "matplotlib": "3.10.3",
+    "scikit-learn": "1.6.1",
+    "lightgbm": "4.6.0"
+  }
+}
