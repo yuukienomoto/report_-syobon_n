@@ -1,0 +1,83 @@
+{
+  "started_at_utc": "2026-11-05T00:35:47.010142+00:00",
+  "finished_at_utc": "2026-11-05T00:36:38.993561+00:00",
+  "python_version": "3.12.14",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "dependency_versions": {
+    "numpy": "2.2.6",
+    "pandas": "2.2.3",
+    "matplotlib": "3.10.3",
+    "scikit-learn": "1.6.1",
+    "lightgbm": "4.6.0"
+  },
+  "test_groups": [
+    {
+      "module": "test_tenhou",
+      "run": 25,
+      "failures": [],
+      "errors": [],
+      "skipped": [],
+      "successful": true
+    },
+    {
+      "module": "test_analysis",
+      "run": 23,
+      "failures": [],
+      "errors": [],
+      "skipped": [],
+      "successful": true
+    },
+    {
+      "module": "test_inputs",
+      "run": 6,
+      "failures": [],
+      "errors": [],
+      "skipped": [],
+      "successful": true
+    }
+  ],
+  "total_run": 54,
+  "total_failures": 0,
+  "total_errors": 0,
+  "total_skipped": 0,
+  "successful": true,
+  "source_sha256": {
+    "mahjong_research/__init__.py": "4a224f7d7bd8fbfb9f5e709da65c325893fcd5502dd9c7754b1a29c587de2d76",
+    "mahjong_research/analysis.py": "8ebff65f75d7a88c70bac44c793c397220ef7e61502a381732a8cf04b7451529",
+    "mahjong_research/inputs.py": "d3c17196735152fefc12bac9ccdd58b928a2a771a64b4fae92fa2ce122ba8467",
+    "mahjong_research/legacy.py": "b05f00c110da647abde06dc07001e5d31b1c9bdd630ca022c5525e21975f621f",
+    "mahjong_research/reporting.py": "1f0d86e7f688f46224c793558733d2890335037800e4dc47ee417dff7e837ad8",
+    "mahjong_research/tenhou.py": "ef6322c05c21f299205bae1fdc5448b5739c6da7280ed619ae37219d4d4a7fa2",
+    "tests/test_tenhou.py": "09d54d5ae2ced8eac74555aa380de4ee64d2e656f9e3a504c0ef27dd486c8c63",
+    "tests/test_analysis.py": "2d794d5e5f4aebfa99ccc52c31b9e152d5db99d7b6b59e3c2654409d9464bc5a",
+    "tests/test_inputs.py": "c7fb6a4e94aa25ac05c9c7965adf13920287c19e7f589ee3b467df4422d65405"
+  },
+  "source_changed_during_run": [],
+  "fixture_scope": "Synthetic unit/integration fixtures. Tiny synthetic model fitting in analysis tests is not study-data training.",
+  "real_data_validation": {
+    "status": "prior_record_not_rerun_in_this_test_command",
+    "record_path": "docs/extractor_validation.json",
+    "record_checked_at_utc": "2026-11-03T15:40:05.580491+00:00",
+    "sample_count": 1,
+    "valid": true,
+    "current_extractor_matches_smoke_hash": true,
+    "full_dataset_reextraction_run": false,
+    "study_model_training_run": false,
+    "external_evaluation_run": false
+  },
+  "legacy_notebook_preservation": {
+    "comparison": "outputs/validation_temporal_external.ipynb vs work/analysis_source.ipynb",
+    "scope": "cell IDs, types and sources including H1-H6; not a fresh remote GitHub comparison",
+    "normalized_cells_match": true,
+    "baseline_sha256": "b3a224ff4ee3f769185cf4d0a6e3274bcb2178d364b0208423c1b155eda9d485",
+    "current_sha256": "c9a5f002b3250ca2cc51436b3dc7adf3253c8af4c109561acf8555ee9a95defc"
+  },
+  "order_verified": false,
+  "full_history_confirmed": false,
+  "limitations": [
+    "54 tests cover synthetic fixtures, not distributional validation of the complete study dataset.",
+    "Real-log validation is the separate prior one-game record; no new real-log processing was performed by this test command.",
+    "Original two source notebooks are not locally available for a fresh hash comparison in this command; remote preservation must be checked at commit publication.",
+    "No new thesis feature differences, internal AUC or external AUC are established by these tests."
+  ]
+}

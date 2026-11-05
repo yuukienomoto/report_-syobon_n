@@ -1,0 +1,49 @@
+{
+  "checked_at_utc": "2026-11-03T15:40:05.580491+00:00",
+  "extractor_version": "tactical-v2.0.0",
+  "extractor_sha256": "ef6322c05c21f299205bae1fdc5448b5739c6da7280ed619ae37219d4d4a7fa2",
+  "feature_count": 20,
+  "synthetic_tests": {
+    "run": 25,
+    "failed": 0,
+    "errors": 0,
+    "successful": true
+  },
+  "real_log_smoke": {
+    "game_id": "2011011315gm-0009-0000-2508363c",
+    "compressed_source_sha256": "3afa260279deaced9640b54e4c9806cd0df8e35436b501d185922b69d7a8e580",
+    "player": "しょぼんｎ",
+    "dan": 1,
+    "go_type": 9,
+    "valid": true,
+    "repeat_deterministic": true,
+    "audit": {
+      "agari_hand_checks": 7,
+      "discard_hand_checks": 179,
+      "draw_hand_checks": 3,
+      "own_meld_chi": 1,
+      "own_meld_kakan": 2,
+      "own_meld_pon": 7,
+      "riichi_hand_checks": 4,
+      "rounds": 13
+    },
+    "source_log_committed": false,
+    "sample_count": 1
+  },
+  "order_verified": false,
+  "full_history_confirmed": false,
+  "full_dataset_reextraction_run": false,
+  "model_training_run": false,
+  "external_evaluation_run": false,
+  "limitations": [
+    "Only one target-player real log, not a sample selected to cover all log event variants.",
+    "No real-log ankan/daiminkan or chasing-riichi example; synthetic fixtures cover the implementation branches.",
+    "No full-data distribution, performance, causal, or chronology conclusions follow from this smoke check.",
+    "Structural waits exclude yaku, furiten and live-wall availability; wait roles may overlap.",
+    "Genbutsu uses each opponent own river only; indicators exclude red and hidden dora."
+  ],
+  "primary_implementation_references": [
+    "https://github.com/MahjongRepository/tenhou-python-bot/blob/master/project/tenhou/decoder.py",
+    "https://github.com/MahjongRepository/mahjong/blob/master/mahjong/agari.py"
+  ]
+}

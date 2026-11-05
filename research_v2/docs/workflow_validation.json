@@ -1,0 +1,15 @@
+{
+  "tests_run": 3,
+  "failures": 0,
+  "errors": 0,
+  "scope": "synthetic orchestration and reporting; no study performance",
+  "source_hashes": {
+    "work/research_v2/mahjong_research/analysis.py": "8ebff65f75d7a88c70bac44c793c397220ef7e61502a381732a8cf04b7451529",
+    "work/research_v2/mahjong_research/inputs.py": "d3c17196735152fefc12bac9ccdd58b928a2a771a64b4fae92fa2ce122ba8467",
+    "work/research_v2/mahjong_research/legacy.py": "b05f00c110da647abde06dc07001e5d31b1c9bdd630ca022c5525e21975f621f",
+    "work/research_v2/mahjong_research/reporting.py": "1f0d86e7f688f46224c793558733d2890335037800e4dc47ee417dff7e837ad8",
+    "work/research_v2/mahjong_research/tenhou.py": "ef6322c05c21f299205bae1fdc5448b5739c6da7280ed619ae37219d4d4a7fa2",
+    "work/research_v2/mahjong_research/workflow.py": "f1865aa85c49bdd64bcdda5b9f23905724ba523b430aaaae6380f99ed849232e",
+    "work/research_v2/mahjong_research/__init__.py": "4a224f7d7bd8fbfb9f5e709da65c325893fcd5502dd9c7754b1a29c587de2d76"
+  }
+}

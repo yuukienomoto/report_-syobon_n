@@ -1,0 +1,26 @@
+{
+  "status": "passed",
+  "executed_utc": "2026-11-03T15:42:53.808480+00:00",
+  "tests_run": 23,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "evidence_scope": "Synthetic generated data and unit tests only. Not real Tenhou data or thesis performance.",
+  "synthetic_scope": "240 generated training rows + 100 generated external rows; both raw-feature and legacy-cross paths; three folds + final LightGBM; saved-model resume; completed external result reused without predict; distribution/calendar/probability/confusion PNGs generated. Additional all-blocked-fold case verified.",
+  "source_hashes": {
+    "mahjong_research\\analysis.py": "8ebff65f75d7a88c70bac44c793c397220ef7e61502a381732a8cf04b7451529",
+    "tests\\test_analysis.py": "2d794d5e5f4aebfa99ccc52c31b9e152d5db99d7b6b59e3c2654409d9464bc5a"
+  },
+  "versions": {
+    "numpy": "2.2.6",
+    "pandas": "2.2.3",
+    "matplotlib": "3.10.3",
+    "scikit-learn": "1.6.1",
+    "lightgbm": "4.6.0"
+  },
+  "not_verified": [
+    "Real-data input consistency and extraction integration",
+    "Real low/high effects and model performance",
+    "Full-history completeness and exact within-hour order"
+  ]
+}
