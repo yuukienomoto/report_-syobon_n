@@ -1,0 +1,8 @@
+{
+  "supplement_tests": 6,
+  "failures": 0,
+  "errors": 0,
+  "scope": "synthetic inputs only; no real shobon effects",
+  "source_sha256": "3bc09216f7d9ae2c031a57ec104cfe41ff608d047973f5f56895a36cb6b83a41",
+  "plots": 4
+}
