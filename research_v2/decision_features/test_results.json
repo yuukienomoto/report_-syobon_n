@@ -1,0 +1,28 @@
+{
+  "new_tests": {
+    "count": 37,
+    "result": "passed"
+  },
+  "legacy_related_tests": {
+    "count": 47,
+    "result": "passed"
+  },
+  "date": "2026-11-19",
+  "model_training_performed": false,
+  "real_complete_games": 1,
+  "real_game_rank_codes": [
+    14
+  ],
+  "drive_pilot_executed": false,
+  "high_rank_real_log_verified": false,
+  "multi_riichi_real_log_verified": false,
+  "kan_real_log_verified": false,
+  "notebook": "6 code cells compiled, preview/extract CLI contract tested on synthetic signed C5; actual Colab/Drive not executed",
+  "regression_modules": [
+    "test_tenhou",
+    "test_inputs",
+    "test_disclosure_regression",
+    "test_choices",
+    "test_smoothing"
+  ]
+}

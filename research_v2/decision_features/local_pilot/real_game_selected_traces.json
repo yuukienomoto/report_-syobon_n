@@ -1,0 +1,681 @@
+[
+  {
+    "round": 5,
+    "round_seed": "2",
+    "event": 555,
+    "seat": 2,
+    "hand": [
+      123,
+      70,
+      90,
+      50,
+      60,
+      37,
+      51,
+      20,
+      64,
+      29,
+      122,
+      47,
+      24,
+      121
+    ],
+    "melds": [],
+    "rivers": [
+      [
+        0,
+        2,
+        14,
+        18,
+        28
+      ],
+      [
+        2,
+        18,
+        26,
+        27,
+        33
+      ],
+      [
+        1,
+        26,
+        27,
+        29,
+        32,
+        33
+      ],
+      [
+        0,
+        9,
+        14,
+        17,
+        28,
+        32
+      ]
+    ],
+    "active": [
+      0
+    ],
+    "drawn": 121,
+    "discard": 90,
+    "own_declaration": true,
+    "excluded": [],
+    "genbutsu": [],
+    "tenpai": [
+      90
+    ],
+    "suji": [
+      47,
+      70
+    ],
+    "features": {
+      "tenpai_safe_alternative_non_genbutsu_rate": {
+        "denominator": 0,
+        "numerator": 0,
+        "reason": "no_genbutsu"
+      },
+      "genbutsu_tenpai_sacrifice_rate": {
+        "denominator": 0,
+        "numerator": 0,
+        "reason": "no_genbutsu"
+      },
+      "suji_fallback_choice_rate": {
+        "denominator": 0,
+        "numerator": 0,
+        "reason": "honor_candidate"
+      },
+      "all_riichi_genbutsu_choice_rate": {
+        "denominator": 0,
+        "numerator": 0,
+        "reason": "opponent_count"
+      }
+    }
+  },
+  {
+    "round": 6,
+    "round_seed": "3",
+    "event": 724,
+    "seat": 2,
+    "hand": [
+      81,
+      86,
+      89,
+      77,
+      29
+    ],
+    "melds": [
+      {
+        "kind": "pon",
+        "tiles": [
+          48,
+          49,
+          51
+        ]
+      },
+      {
+        "kind": "chi",
+        "tiles": [
+          52,
+          59,
+          60
+        ]
+      },
+      {
+        "kind": "chi",
+        "tiles": [
+          14,
+          16,
+          22
+        ]
+      }
+    ],
+    "rivers": [
+      [
+        0,
+        1,
+        2,
+        4,
+        5,
+        8,
+        10,
+        11,
+        14,
+        16,
+        18,
+        19,
+        20,
+        27,
+        30
+      ],
+      [
+        0,
+        1,
+        5,
+        8,
+        13,
+        15,
+        16,
+        17,
+        25,
+        27,
+        28,
+        29,
+        30
+      ],
+      [
+        0,
+        3,
+        7,
+        8,
+        9,
+        15,
+        16,
+        17,
+        23,
+        27,
+        28,
+        29,
+        32
+      ],
+      [
+        1,
+        2,
+        3,
+        5,
+        6,
+        7,
+        10,
+        11,
+        12,
+        13,
+        16,
+        17,
+        23,
+        31
+      ]
+    ],
+    "active": [
+      0
+    ],
+    "drawn": 29,
+    "discard": 29,
+    "own_declaration": false,
+    "excluded": [],
+    "genbutsu": [
+      77,
+      81
+    ],
+    "tenpai": [
+      29,
+      77,
+      89
+    ],
+    "suji": [
+      29
+    ],
+    "features": {
+      "tenpai_safe_alternative_non_genbutsu_rate": {
+        "denominator": 1,
+        "numerator": 1,
+        "reason": "included"
+      },
+      "genbutsu_tenpai_sacrifice_rate": {
+        "denominator": 0,
+        "numerator": 0,
+        "reason": "genbutsu_can_keep_tenpai"
+      },
+      "suji_fallback_choice_rate": {
+        "denominator": 0,
+        "numerator": 0,
+        "reason": "genbutsu_available"
+      },
+      "all_riichi_genbutsu_choice_rate": {
+        "denominator": 0,
+        "numerator": 0,
+        "reason": "opponent_count"
+      }
+    }
+  },
+  {
+    "round": 6,
+    "round_seed": "3",
+    "event": 732,
+    "seat": 2,
+    "hand": [
+      81,
+      86,
+      89,
+      77,
+      123
+    ],
+    "melds": [
+      {
+        "kind": "pon",
+        "tiles": [
+          48,
+          49,
+          51
+        ]
+      },
+      {
+        "kind": "chi",
+        "tiles": [
+          52,
+          59,
+          60
+        ]
+      },
+      {
+        "kind": "chi",
+        "tiles": [
+          14,
+          16,
+          22
+        ]
+      }
+    ],
+    "rivers": [
+      [
+        0,
+        1,
+        2,
+        4,
+        5,
+        8,
+        10,
+        11,
+        14,
+        16,
+        18,
+        19,
+        20,
+        27,
+        30
+      ],
+      [
+        0,
+        1,
+        5,
+        8,
+        13,
+        15,
+        16,
+        17,
+        20,
+        25,
+        27,
+        28,
+        29,
+        30
+      ],
+      [
+        0,
+        3,
+        7,
+        8,
+        9,
+        15,
+        16,
+        17,
+        23,
+        27,
+        28,
+        29,
+        32
+      ],
+      [
+        1,
+        2,
+        3,
+        5,
+        6,
+        7,
+        8,
+        10,
+        11,
+        12,
+        13,
+        16,
+        17,
+        23,
+        31
+      ]
+    ],
+    "active": [
+      0
+    ],
+    "drawn": 123,
+    "discard": 123,
+    "own_declaration": false,
+    "excluded": [],
+    "genbutsu": [
+      77,
+      81,
+      123
+    ],
+    "tenpai": [
+      77,
+      89,
+      123
+    ],
+    "suji": [],
+    "features": {
+      "tenpai_safe_alternative_non_genbutsu_rate": {
+        "denominator": 1,
+        "numerator": 0,
+        "reason": "included"
+      },
+      "genbutsu_tenpai_sacrifice_rate": {
+        "denominator": 0,
+        "numerator": 0,
+        "reason": "genbutsu_can_keep_tenpai"
+      },
+      "suji_fallback_choice_rate": {
+        "denominator": 0,
+        "numerator": 0,
+        "reason": "genbutsu_available|honor_candidate|no_full_suji"
+      },
+      "all_riichi_genbutsu_choice_rate": {
+        "denominator": 0,
+        "numerator": 0,
+        "reason": "opponent_count"
+      }
+    }
+  },
+  {
+    "round": 6,
+    "round_seed": "3",
+    "event": 740,
+    "seat": 2,
+    "hand": [
+      81,
+      86,
+      89,
+      77,
+      50
+    ],
+    "melds": [
+      {
+        "kind": "pon",
+        "tiles": [
+          48,
+          49,
+          51
+        ]
+      },
+      {
+        "kind": "chi",
+        "tiles": [
+          52,
+          59,
+          60
+        ]
+      },
+      {
+        "kind": "chi",
+        "tiles": [
+          14,
+          16,
+          22
+        ]
+      }
+    ],
+    "rivers": [
+      [
+        0,
+        1,
+        2,
+        4,
+        5,
+        7,
+        8,
+        10,
+        11,
+        14,
+        16,
+        18,
+        19,
+        20,
+        27,
+        30
+      ],
+      [
+        0,
+        1,
+        5,
+        8,
+        13,
+        15,
+        16,
+        17,
+        20,
+        25,
+        27,
+        28,
+        29,
+        30,
+        31
+      ],
+      [
+        0,
+        3,
+        7,
+        8,
+        9,
+        15,
+        16,
+        17,
+        23,
+        27,
+        28,
+        29,
+        30,
+        32
+      ],
+      [
+        1,
+        2,
+        3,
+        5,
+        6,
+        7,
+        8,
+        10,
+        11,
+        12,
+        13,
+        16,
+        17,
+        20,
+        23,
+        31
+      ]
+    ],
+    "active": [
+      0
+    ],
+    "drawn": 50,
+    "discard": 77,
+    "own_declaration": false,
+    "excluded": [],
+    "genbutsu": [
+      77,
+      81
+    ],
+    "tenpai": [
+      50
+    ],
+    "suji": [],
+    "features": {
+      "tenpai_safe_alternative_non_genbutsu_rate": {
+        "denominator": 1,
+        "numerator": 0,
+        "reason": "included"
+      },
+      "genbutsu_tenpai_sacrifice_rate": {
+        "denominator": 1,
+        "numerator": 1,
+        "reason": "included"
+      },
+      "suji_fallback_choice_rate": {
+        "denominator": 0,
+        "numerator": 0,
+        "reason": "genbutsu_available|no_full_suji"
+      },
+      "all_riichi_genbutsu_choice_rate": {
+        "denominator": 0,
+        "numerator": 0,
+        "reason": "opponent_count"
+      }
+    }
+  },
+  {
+    "round": 6,
+    "round_seed": "3",
+    "event": 748,
+    "seat": 2,
+    "hand": [
+      81,
+      86,
+      89,
+      50,
+      130
+    ],
+    "melds": [
+      {
+        "kind": "pon",
+        "tiles": [
+          48,
+          49,
+          51
+        ]
+      },
+      {
+        "kind": "chi",
+        "tiles": [
+          52,
+          59,
+          60
+        ]
+      },
+      {
+        "kind": "chi",
+        "tiles": [
+          14,
+          16,
+          22
+        ]
+      }
+    ],
+    "rivers": [
+      [
+        0,
+        1,
+        2,
+        4,
+        5,
+        7,
+        8,
+        10,
+        11,
+        14,
+        16,
+        18,
+        19,
+        20,
+        27,
+        30,
+        31
+      ],
+      [
+        0,
+        1,
+        5,
+        8,
+        13,
+        15,
+        16,
+        17,
+        20,
+        25,
+        27,
+        28,
+        29,
+        30,
+        31
+      ],
+      [
+        0,
+        3,
+        7,
+        8,
+        9,
+        15,
+        16,
+        17,
+        19,
+        23,
+        27,
+        28,
+        29,
+        30,
+        32
+      ],
+      [
+        1,
+        2,
+        3,
+        5,
+        6,
+        7,
+        8,
+        10,
+        11,
+        12,
+        13,
+        16,
+        17,
+        18,
+        20,
+        23,
+        31
+      ]
+    ],
+    "active": [
+      0
+    ],
+    "drawn": 130,
+    "discard": 130,
+    "own_declaration": false,
+    "excluded": [],
+    "genbutsu": [
+      81
+    ],
+    "tenpai": [
+      50
+    ],
+    "suji": [],
+    "features": {
+      "tenpai_safe_alternative_non_genbutsu_rate": {
+        "denominator": 1,
+        "numerator": 1,
+        "reason": "included"
+      },
+      "genbutsu_tenpai_sacrifice_rate": {
+        "denominator": 1,
+        "numerator": 0,
+        "reason": "included"
+      },
+      "suji_fallback_choice_rate": {
+        "denominator": 0,
+        "numerator": 0,
+        "reason": "genbutsu_available|honor_candidate|no_full_suji"
+      },
+      "all_riichi_genbutsu_choice_rate": {
+        "denominator": 0,
+        "numerator": 0,
+        "reason": "opponent_count"
+      }
+    }
+  }
+]

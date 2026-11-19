@@ -1,0 +1,23 @@
+{
+  "game_id": "2012052419gm-0029-0000-eb0d38e9",
+  "player": "しょぼんｎ",
+  "seat": 2,
+  "dan": 14,
+  "xml_sha256": "e854dcd5faf6ccaabe7555e2d91b5e43492fb408d1e8fc4b896bd75d6fde2640",
+  "extraction_seconds": 0.028283499996177852,
+  "status": "ok",
+  "legacy20_unchanged": true,
+  "legacy3_unchanged": true,
+  "audit": {
+    "rounds": 10,
+    "own_discards": 135,
+    "free_responses": 24,
+    "calls": 21,
+    "kans": 0,
+    "multi_riichi_discards": 0
+  },
+  "selection": "以前の障害調査で保存済みの1対局。便宜抽出。初期1500除外後の対象かはC5台帳なしで未確認。",
+  "full_history_confirmed": false,
+  "order_verified": false,
+  "coverage_limit": "高段位・複数他家リーチ・カン実牌譜未検証。E3/E4分母0。10/20窓未測定。"
+}

@@ -1,0 +1,5 @@
+﻿game_id,dan,feature,numerator,denominator,value,zero_denominator_games,successful_games,missing_rate,scope
+2012052419gm-0029-0000-eb0d38e9,14,tenpai_safe_alternative_non_genbutsu_rate,2,4,0.5,0,1,0,one_real_game_replay_not_cohort_analysis
+2012052419gm-0029-0000-eb0d38e9,14,genbutsu_tenpai_sacrifice_rate,1,2,0.5,0,1,0,one_real_game_replay_not_cohort_analysis
+2012052419gm-0029-0000-eb0d38e9,14,suji_fallback_choice_rate,0,0,,1,1,1,one_real_game_replay_not_cohort_analysis
+2012052419gm-0029-0000-eb0d38e9,14,all_riichi_genbutsu_choice_rate,0,0,,1,1,1,one_real_game_replay_not_cohort_analysis
