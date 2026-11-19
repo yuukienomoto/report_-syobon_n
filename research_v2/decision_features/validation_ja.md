@@ -53,7 +53,7 @@ E3/E4の値はNaNであり0%ではない。この欠損率は1対局だけの値
 
 第5局555は5索（ID90）切りで形状テンパイだが、現物がないためA1/A4から除外。追加3のchoose_structural_tenpaiと同一の指標ではないことも確認した。
 
-第6局を元XMLの順序のまま抜き出した `tests/fixtures/real_round6.xml` を回帰テストに追加した。局内のイベント・手牌・公開情報は変更していない。既存 `choices/real_rounds.xml` は同じ対局の別2局であり、別の実対局を検証した件数に数えていない。
+第6局を元XMLの順序のまま抜き出した `tests/fixtures/real_round6.xml` を回帰テストに追加した。局内のイベント・手牌・公開情報は変更していない。手元の既存 `choices/real_rounds.xml` はGitHubに存在しなかったため、新フォルダの `tests/fixtures/real_rounds4_5.xml` に同梱した。これは同じ対局の別2局であり、別の実対局を検証した件数に数えていない。
 
 ## 検証範囲と残課題
 

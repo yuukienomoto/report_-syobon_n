@@ -191,7 +191,7 @@ class ReplayTests(unittest.TestCase):
         self.assertEqual(extract(a,'target'),extract(b,'target'))
 
     def test_real_rounds_legacy20_and3_unchanged(self):
-        data=(ROOT/'choices/real_rounds.xml').read_bytes()
+        data=(Path(__file__).parent/'fixtures/real_rounds4_5.xml').read_bytes()
         before20=extract_game(data,'しょぼんｎ')
         before3=old_choices(data,2,14)
         result=extract(data,'しょぼんｎ',2,14)
