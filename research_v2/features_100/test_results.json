@@ -1,0 +1,21 @@
+{
+  "tests_run": 285,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "success": true,
+  "modules": [
+    "features_100.tests.test_core",
+    "features_100.tests.test_quality",
+    "features_100.tests.test_integration",
+    "features_100.tests.test_rule_tables",
+    "test_tenhou",
+    "test_inputs"
+  ],
+  "synthetic_only": true,
+  "real_logs_executed": 0,
+  "models_trained": 0,
+  "catalog_status_contracts": 100,
+  "implemented_predicate_table_cases": 90,
+  "limitation": "判定表は固定解析値の単体検証。全候補の物理的実牌譜正例検証ではない。"
+}
