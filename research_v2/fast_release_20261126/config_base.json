@@ -1,0 +1,12 @@
+{
+  "run_dir": "/content/drive/MyDrive/卒論/research_v2_runs/20261105T071722Z_5da6c9ad",
+  "output_root": "/content/drive/MyDrive/卒論/research_v2_features_100_fast",
+  "player": "しょぼんｎ",
+  "key": "shobon",
+  "zip_override": null,
+  "pilot_per_group": 3,
+  "pilot_ids": null,
+  "exploration_end_hour": "",
+  "workers": 2,
+  "cache_shards": true
+}

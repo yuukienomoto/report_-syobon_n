@@ -1,0 +1,19 @@
+{
+  "local_synthetic_tests": 252,
+  "failures": 0,
+  "real_games_executed_locally": 0,
+  "windows_parallel_fork_not_tested": true,
+  "user_reported": {
+    "games_compared": 36,
+    "additional_audit_games": 30,
+    "old_2_process_seconds": 425.835,
+    "fast_1_process_seconds": 55.192,
+    "fast_2_process_seconds": 46.268,
+    "counters_mismatched": 0,
+    "audit_mismatched": 0
+  },
+  "benchmark_files_received": false,
+  "legacy_regression_tests": 33,
+  "supplement_tests": 3,
+  "total_tests": 288
+}
